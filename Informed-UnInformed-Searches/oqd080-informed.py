@@ -119,12 +119,18 @@ def print_maze_with_path(maze, path):
         print(''.join(row))
 
 def main():
+    print("=" * 50)
+    print("Informed Search: A* with Manhattan Distance")
+    print("=" * 50)
+
     maze = read_maze('maze.txt')
     start, exit_pos = find_start_and_exit(maze)
 
-    print(f"Start: {start}")
-    print(f"Exit:  {exit_pos}")
-    print()
+    print(f"Maze size: {len(maze)} rows x {len(maze[0])} cols")
+    print(f"Start position (bottom-right): {start}")
+    print(f"Exit position  (top-left):     {exit_pos}")
+    print(f"Initial heuristic (Manhattan distance): {manhattan_distance(start, exit_pos)}")
+    print("\nSearching for optimal path using A*...")
 
     # Run A* to find the optimal path
     result = astar(maze, start, exit_pos)
@@ -133,7 +139,11 @@ def main():
     if path is None:
         print("No solution found")
     else:
+        print(f"Optimal path found! Length: {len(path)} cells\n")
+        print("Maze with solution path marked by '*':")
+        print("-" * 50)
         print_maze_with_path(maze, path)
+        print("-" * 50)
         print(f"\nCost of path: {cost}")
 
 if __name__ == '__main__':
